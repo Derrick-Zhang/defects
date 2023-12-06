@@ -1,0 +1,862 @@
+
+
+
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{youngtab}
+\usepackage{amsmath,amssymb,latexsym,cite}
+\usepackage{amsthm}
+\usepackage{cite}
+%\usepackage[a-1b]{pdfx}    % archival
+\usepackage[]{hyperref}
+\usepackage{xcolor}
+\oddsidemargin 0in \textwidth 6.5in \topmargin 0in \headheight 0in
+\textheight 8.5in
+\parskip 2ex
+\input xy
+\xyoption{all}
+
+                                              
+\begin{document}
+
+\vspace*{0.5in}
+
+\begin{center}
+
+{\large\bf Notes on Schubert cycles and defects}
+
+\end{center}
+
+
+\section{Ordinary Grassmannians}
+
+**** Cyril's paper:  \cite{Closset:2023bdr}
+
+
+Consider $G(k,N)$.  Consider the Schubert cycle corresponding to a single
+box.
+
+From (3.63), $r_1 = 1$, $M_1 = k$, and $\varphi_1^2$ is a bifundamental
+$U(1) \rightarrow U(k)$.  We have $J$ terms
+\begin{equation}
+\varphi_1^2 \phi^{(1)}_{\alpha} \Lambda^{(1)}_{\alpha},
+\end{equation}
+where $\alpha \in \{1 \cdots M_1\}$.
+$\phi$ is the $k \times N$ matrix defining the original Grassmannian.
+It's broken into a $k \times M_1$ submatrix $\phi^{(1)}$,
+and a $k \times (N-k)$ submatrix $\phi^{(0)}$ (which does not appear above).
+
+See p 28 of Cyril et al.
+
+So, the $J$ terms in this case are a product of $k \times 1$, $k \times k$
+and $1 \times k$ matrices, and it looks like their effect is to give a mass
+to a $1 \times k$ submatrix of $\phi^{(1)}$, which then has vanishing vev,
+as appropriate for one of the Schubert cycles.
+
+Note the flavor symmetry $U(N)$ is broken to $U(k) \times U(N-k)$.
+
+
+
+\subsection{Basics of Schubert varieties}
+
+**** Early in \cite{fp} are some good basics on Schubert cells.
+See p 18 for some exact sequences; p 19 for a description of Schubert
+cells in terms of vanishing matrix entries, ala Cyril.
+
+
+**** From \cite[chapter 1.5]{gh}:
+
+First, recall that we can give a cell decomposition of ${\mathbb P}^n$,
+writing it as a union 
+\begin{equation}
+{\mathbb P}^n \: = \: {\mathbb C}^n \cup {\mathbb C}^{n-1} \cup
+\cdots \cup {\mathbb C}^1 \cup {\mathbb C}^0,
+\end{equation}
+by first choosing a flag
+\begin{equation}
+V \: = \: \{ V_1 \subsetneq V_2 \subsetneq \cdots \subsetneq V_n 
+\subsetneq {\mathbb C}^{n+1} \}
+\end{equation}
+and take 
+\begin{equation}
+W_i \: = \: {\mathbb C}^{i-1} \: = \: \{
+\ell \in {\mathbb C}^{n+1} \, | \,
+\ell \in V_i, \: \ell \not\in V_{i=1} \}.
+\end{equation}
+The $W_i$ then form the cell decomposition of the projective space.
+
+***** RESTART NOTATION:  $n$ instead of $N$ below. ****
+
+**** Following the discussion of \cite{gh} *very* closely,
+
+we can do the same thing in Grassmannians.
+Consider $G(k,n)$.  Let $\Lambda \in G(k,n)$ be a
+Let $\lambda_1, \cdots, \lambda_k$ be a nonincreasing set of integers
+$\leq n-k$.  
+Fix a flag consisting of vector spaces $V_i \subsetneq V_{i+1}$ for all
+$i$.  The Schubert cell is the set of $\Lambda \in G(k,n)$ whose intersection
+with the $V_i$ is of a specific dimension.
+Specifically, the Schubert cells corresponding to the $\lambda_i$ is
+\begin{equation}
+W_{\lambda_1, \cdots, \lambda_k} \: = \: \{ \Lambda \in G(k,n) \, | \,
+\dim \left( \Lambda \cap V_{n-k+i-\lambda_i} \right) = i \}.
+\end{equation}
+The closure is given by
+\begin{equation}
+\overline{W}_{\lambda_1, \cdots, \lambda_k} \: = \: \{ \Lambda \in G(k,n) \, | \,
+\dim \left( \Lambda \cap V_{n-k+i-\lambda_i} \right) \geq  i \}.
+\end{equation}
+
+
+**** Construct some examples and compare to Cyril.
+
+***** GH p 196 has a big matrix illustrating this in some generality.
+
+
+Now, let's compare to the construction of \cite[section 3.3.1]{Closset:2023bdr},
+in the Grassmannian $G(k,n)$.
+For a given Young diagram $\lambda$, define integers 
+$\{ \alpha_1, \cdots, \alpha_k \}$,
+\begin{equation}
+1 \leq \alpha_1 < \alpha_2 < \alpha_3 < \cdots < \alpha_k \leq n,
+\end{equation}
+by
+\begin{equation}
+\lambda \: = \: [ \alpha_k - k, \cdots, \alpha_1 - 1].
+\end{equation}
+
+We give a few examples below to illustrate this in $G(2,4)$:
+\begin{center}
+\begin{tabular}{c|c|cc}
+Young diagram & $\lambda$ & $\alpha_1$ & $\alpha_2$ \\ \hline
+$\emptyset$ & $[0,0]$ & $1$ & $2$ \\
+$\tiny\yng(1)$ & $[1,0]$ & $1$ & $3$ \\
+$\tiny\yng(2)$ & $[2,0]$ & $1$ & $4$ \\
+$\tiny\yng(1,1)$ & $[1,1]$ & $2$ & $3$
+\end{tabular}
+\end{center}
+
+Then, corresponding to the Young diagram $\lambda$, the Schubert cell
+is represented by $k \times n$ matrix $\phi$ with the property that on
+the $n$th row,
+\begin{itemize}
+\item the first $\alpha_n-1$ entries vanish,
+\item the $\alpha_n$th entry equals $1$,
+\item the entries above the $\alpha_n$th entry vanish.
+\end{itemize}
+
+The result has 
+\begin{equation}
+\sum_{i=1}^{k-1} (i) \left( \alpha_{i+1} - \alpha_i - 1 \right) \: + \:
+(n - \alpha_k) k \: = \: k(n-k) \: - \: \sum_i \lambda_i 
+\: = \: k (n-k) \: - \: | \lambda |
+\end{equation}
+undetermined entries, and hence describes a Schubert cycle of the same
+dimension.  For example, in $G(2,4)$,
+\begin{center}
+\begin{tabular}{c|cc|c} 
+Young diagram & $\alpha_1$ & $\alpha_2$ & dimension \\ \hline
+$\emptyset$ & $1$ & $2$ & $4$ \\
+$\tiny\yng(1)$ & $1$ & $3$ & $3$ \\
+$\tiny\yng(2)$ & $1$ & $4$ & $2$ \\
+$\tiny\yng(1,1)$ & $2$ & $3$ & $2$
+\end{tabular}
+\end{center}
+
+Comparing to the description of \cite{gh}, we define a flag
+\begin{equation}
+V_1 \: = \: \langle e_1 \rangle, \: \: \:
+V_2 \: = \: \langle e_1, e_2 \rangle, \: \: \:
+V_n \: = \: \langle e_1, e_2, \cdots, e_n \rangle, \: \: \:
+\cdots.
+\end{equation}
+Then, if we let $\Lambda_{\lambda}$ denote the closure of the Schubert
+cell corresponding to $\lambda$, the description of \cite{Closset:2023bdr}
+guarantees that 
+
+**** FILL IN
+
+
+
+****** NOTE:  Under dualizing $G(k,n)$ to $G(n-k,n)$,
+take the transpose of the Young diagrams to map Schubert cycles between
+them, ie, if $\lambda$ defines a Schubert cell in $G(k,n)$,
+then $\lambda^T$ defines the same Schubert cell in $G(n-k,n)$.
+******
+
+***** Fulton Pra... ".. degeneracy loci.." may be a useful reference.
+
+
+
+
+\subsection{Defect construction}
+
+***** RELN to quiver given in Cyril et al eq (3.63) p 27
+
+Given a Schubert cycle described as above, we can construct a quiver
+gauge theory on a defect, following \cite[section 3.3.3]{Closset:2023bdr},
+which we review here.
+Write
+\begin{equation}
+\lambda \: = \: [ \lambda_1, \cdots, \lambda_{\ell}, 0, \cdots, 0 ].
+\end{equation}
+Then, the gauge group on the defect is
+\begin{equation}
+U(1) \times U(2) \times \cdots \times U(\ell).
+\end{equation}
+Furthermore, we partition $n$ into a $\ell+1$ blocks of dimensions
+$M_i$ ($0 \leq i \leq \ell$), where
+\begin{equation}
+M_i \: = \: \left\{ \begin{array}{cl}
+\lambda_i - \lambda_{i+1} + 1 & 1 \leq i < \ell, \\
+\lambda_{\ell} - \ell + k & i = \ell, \\
+n - \sum_{j=1}^{\ell} M_j = n-k+1-\lambda_1  & i = 0 .
+\end{array} \right.
+\end{equation}
+For $1 \leq i \leq \ell$, there are Fermi multiplets in the
+bifundamental of $U(i) \times \left( U(M_i) \subset U(n) \right)$
+(the first factor local, the second factor global). 
+In addition, there are bifundamentals $\varphi_i^{i+1}$ between
+\begin{equation}
+\left\{ \begin{array}{cl}
+U(i) \times U(i+1) & i < \ell, \\
+U(\ell) \times U(k) & i = \ell.
+\end{array} \right.
+\end{equation}
+
+
+***** NOTE that we haven't used the $\alpha_i$ -- do they show up in
+writing the superpotential?  If not, they can be eliminated from the discussion.
+******
+
+The reader should note that the defect gauge group and the $\varphi$
+define a flag manifold $F(1,2,\cdots,\ell, k)$ over every point
+of $G(k,n)$, following the GLSM description of flag manifolds 
+in \cite{Donagi:2007hi} as, in this case, a $U(1) \times U(2)
+\times \cdots \times U(\ell)$ gauge theory with bifundamentals,
+in the same pattern as the $\varphi$.
+
+
+*** This should tie into the description of Schubert cells in
+Fulton's Intersection theroy (ch 14 or so).
+******
+
+
+Finally, there is a superpotential
+\begin{equation}
+\int d \theta \, \sum_{i=1}^{\ell} \varphi_i^{i+1} \varphi_{i+1}^{i+2}
+\cdots \varphi_{\ell}^{\ell+1} \phi^{(i)} \Lambda^{(i)}.
+\end{equation}
+
+**** This seems to define the same map from the flag bundle above to 
+the vector space $V$ of $G(k,V)$ that appears in
+\cite[section 14.3]{fulton}, if we let $\sigma: S \hookrightarrow
+V$ be inclusion in the notation of that reference.  Later in
+\cite[chapter 14]{fulton} there's also a discussion of Schubert varieties...
+
+**** Specifically, \cite[section 14.3]{fulton} describes Schubert varieties
+in cohomology, and looks related.
+
+**** See \cite[theorem 2.1]{buch1}.  There, given a space $X$ and a flag
+$E_0 \rightarrow E_1 \rightarrow \cdots \rightarrow E_n$ of bundles
+on $X$, they describe a construction of subspaces of $X$, which looks
+similar.
+They say that their quiver variety $\Omega_r$ is the scheme-theoretic
+intersection of the zero sections of the bundle maps 
+\begin{equation}
+\wedge^{r_{ij}+1} E_i \: \longrightarrow \: \wedge^{r_{ij}+1} E_j,
+\end{equation}
+where the $r_{ij}$ are a set of nonnegative integers.
+They also place a further requirement on the $r_{ij}$ -- can Schubert
+cycles be described in this language?
+********
+
+
+We can summarize the mathematical interpretation of the defect
+construction as follows.  Given $G(k,n)$, with universal subbundle $S$,
+construct a flag bundle $\pi: F(1,2,\cdots,\ell,S) \rightarrow G(k,n)$
+where $\ell$ is the number
+of nonzero rows in the Young diagram $\lambda$.
+
+*** If $\ell=k$, be careful -- Cyril et al's prescription gives a 
+separate $U(k)$ on the defect.
+
+Let 
+\begin{equation}
+S_{1} \: \stackrel{\varphi_1^2}{\hookrightarrow} \:
+S_2 \: \stackrel{\varphi_2^3}{\hookrightarrow} \:
+\cdots \:
+\: \stackrel{\varphi_{\ell-1}^{\ell}}{\hookrightarrow} \:
+S_{\ell} \: \stackrel{\varphi_{\ell}^{\ell+1}}{\hookrightarrow} \:
+\pi^* S
+\end{equation}
+denote the universal subbundles $S_i$ (of rank $i$) 
+on the flag bundle $F(1,2,\cdots,\ell,S)$
+and their inclusions, ultimately into the pullback of the universal
+subbundle $S$ on $G(k,n)$.
+
+Partition the vector space $V = {\mathbb C}^n$ into $\ell+1$ distinct subspaces
+$V_i$ ($0 \leq i \leq \ell$) of dimensions as follows:
+\begin{equation}
+\dim V_i \: = \: \left\{ \begin{array}{cl}
+\lambda_i - \lambda_{i+1} + 1 & 1 \leq i < \ell, \\
+\lambda_{\ell} - \ell + k & i = \ell, \\
+n - k + 1 - \lambda_1 & i = 0,
+\end{array} \right.,
+\end{equation}
+and define
+\begin{equation}
+F_i \: = \: V_0 \times \prod_{j \neq i} V_j \: \subset \: V,
+\end{equation}
+for $1 \leq i \leq \ell$.
+
+{
+    \color{blue} Let \(\lambda_0=n-k\) and \(\lambda_{\ell+1}=\ell-k+1\). Fix a basis \(\{e_i, 1\leq i\leq n\}\) for \(V=\mathbb{C}^n\) and let \(V_i=\langle e_{\lambda_0-\lambda_{i}+i+1},\dots,e_{\lambda_0-\lambda_{i+1}+i+1}\rangle\). Then we have \(\dim V_i=\lambda_i-\lambda_{i+1}+1\) for \(1\leq i\leq \ell\).
+    Let \(\tilde{F}_j=\langle e_1,\dots,e_j\rangle\) for \(1\leq j\leq n\). Then they form a flag. Moreover, \(\tilde{F}_{n-k+i-\lambda_i}=\bigoplus_{j=0}^{i-1}V_i=\bigcap_{j=i}^\ell F_j\).
+    % Let \(\tilde{F}_{n-k+i-\lambda_i}=F_i=\bigoplus_{j=0}^{i-1}V_i\), then \(\dim\tilde{F}_{n-k+i-\lambda_i}=n-k+i-\lambda_i\) and these vector spaces form a partial flag \(\tilde{F}_{n-k+1-\lambda_1}\subset\dots\subset\tilde{F}_{n-k+\ell-\lambda_\ell}\).
+}
+
+Let $Z_i$ denote the zero locus in $G(k,n)$ {\color{blue}$F(1,2,\cdots,\ell,S)$} of the map defined by
+the composition
+\begin{equation}
+S_i \: \hookrightarrow \: S_{i+1} \hookrightarrow \: \cdots \:
+S_{\ell} \: \hookrightarrow \: \pi^* S \: \hookrightarrow \:
+V \: \longrightarrow \: V / F_i = V_i.
+\end{equation}
+
+{\color{blue}Let \(\Omega=\pi(Z_1 \cap Z_2 \cap \cdots \cap Z_{\ell})\) and \(\Sigma\) be a \(k\)-dimensional vector subspace of \(V\). Then \(\Sigma\in\Omega\) if and only if there exists a nested sequence of vector spaces \(\Sigma_1\subset\dots\Sigma_\ell\subseteq\Sigma\), where \(\Sigma_i\subseteq F_i\), and in particular, \(\Sigma_\ell\subseteq F_\ell=\tilde{F}_{n-k+\ell-\lambda_\ell}\), \(\Sigma_{\ell-1}\subseteq F_{\ell-1}\cap F_l=\tilde{F}_{n-k+\ell-1-\lambda_{\ell-1}},\dots,\Sigma_1\subseteq\bigcap_{j=1}^\ell F_j=\tilde{F}_{n-k+1-\lambda_1}\). This is if and only if \(\dim(\Sigma\cap \tilde{F}_{n-k+i-\lambda_i})\geq i\) for \(1\leq i\leq \ell\). Hence, \(\Omega\) is the Schubert variety corresponding to \(\lambda\).
+% , more specifically, \(\Sigma_1\subseteq V_0=\tilde{F}_{n-k+1-\lambda_1}\)   
+}
+
+Then, the defect lives on the intersection
+\begin{equation}     \label{eq:schubert-int}
+Z_1 \cap Z_2 \cap \cdots \cap Z_{\ell}.
+\end{equation}
+
+**** Or a pushforward thereof, rather. ***
+
+
+
+FILL IN
+
+*********************************
+
+Mathematically, let 
+\begin{equation}
+\tilde{F}_1 \subset \tilde{F}_2 \subset \cdots \subset \tilde{F}_{\ell} \subset
+{\mathbb C}^n = V
+\end{equation}
+be a flag of subspaces, where
+\begin{equation}
+\dim \tilde{F}_i \: = \: n - k + i - \lambda_i,
+\end{equation}
+for $\lambda_i$ the number of boxes in row $i$,
+then the Schubert cells is the intersection~(\ref{eq:schubert-int}) 
+where the $Z_i$ are zero loci of maps defined by the composition
+\begin{equation}
+S_i \: \hookrightarrow \: S_{i+1} \hookrightarrow \: \cdots \:
+S_{\ell} \: \hookrightarrow \: \pi^* S \: \hookrightarrow \:
+V \: \longrightarrow \: V / \tilde{F}F_i.
+\end{equation}
+
+**** Note that the section above is on the flag bundle; presumably, we have
+to push forward to the Grassmannian. ****
+
+**** Note that in the physics construction we pick a basis for $V$.
+Perhaps $F_1$ can be obtained from $\tilde{F}_1$ by taking the span of all
+vectors not in $\tilde{F}_2$, and so forth for the remaining members.
+
+**** Conversely, if we started with an analogous physics construction
+that used $\tilde{F}_i$'s instead of Cyril et al's $F_i$'s, I'm wondering
+if we could use some sort of linear algebra argument to demonstrate that
+the resulting defects (defined by $\tilde{F}_i$) were equivalent to
+those in Cyril et al's construction.
+
+**** We spoke with Cyril on Nov 25 2023; he agreed with our interpretation
+of his construction, and that it's not manifestly the same (but surely
+equivalent) to the mathematics construction utilizing the flag
+$\{ \tilde{F}_i \}$.
+
+
+\subsection{Examples}
+
+
+Next, we will describe the defects explicitly in some examples,
+and also describe the sheaves described by the defects.
+
+First consider ${\mathbb P}^{n-1} = G(1,n)$.
+There, the Young tableau are single rows of boxes,
+and so are completely determined by $\lambda_1$.
+Let's assume $\lambda_1 \neq 0$, so $\ell = 1$.
+Then, the gauge group on the defect is $U(1)$,
+and
+\begin{equation}
+M_0 \: = \: n - \lambda_1, \: \: \: M_2 \: = \: \lambda_1.
+\end{equation}
+There is one bifundamental $\varphi_1^2$ in $U(1) \times U(1)$
+(one local on defect, the other local in bulk),
+and a bifundamental Fermi $\Lambda^{(1)}$ in $U(1) \times U(\lambda_1)$
+(the first factor local on the defect, the second factor global, a subgroup of
+$U(n)$), with superpotential
+\begin{equation}
+\int d\theta \, \varphi_1^2 \phi^{(1)} \Lambda^{(1)}.
+\end{equation}
+D terms imply that the $\varphi_1^2$ do not all vanish,
+hence this will constrain $\phi^{(1)}$ to vanish.
+Since $\phi^{(1)}$ is a $1 \times \lambda_1$ matrix,
+this means that this defect lies along a codimension $\lambda_1$ locus,
+which matches expectations for Schubert cells in projective spaces.
+In fact, the Schubert variety in this case is ${\mathbb P}^{n-1-\lambda_1}$.
+
+In passing, note that the number of $\Lambda^{(1)}$ matches the
+codimension.
+
+Now, let us interpret this mathematically.
+From the bulk perspective, we interpret the $\Lambda^{(1)}$ as coupling to
+${\cal O}^{\oplus \lambda_1}$ and $\varphi_1^2$ as coupling to ${\cal O}(-1)$,
+so that the superpotential is realizing the cokernel of the map
+\begin{equation}
+{\cal O}(-1) \: \stackrel{\phi^{(1)}}{\longrightarrow} \:
+{\cal O}^{\oplus \lambda_1},
+\end{equation}
+which can also be described as
+\begin{equation}
+{\cal O}(-1) \: \stackrel{\phi^{(1)}}{\longrightarrow} \:
+{\cal O}^{n} \: \longrightarrow \: {\cal O}^{n - \lambda_1},
+\end{equation}
+where the second map is a projection.
+The Schubert variety ${\mathbb P}^{n-1-\lambda_1}$ is the zero section 
+of this map.
+
+For $\lambda_1 = 1$, the cokernel of the map above
+is precisely ${\cal O}_D$, the structure sheaf
+of the divisor.  For $\lambda_1 > 1$, the cokernel, call it $C$, is
+not\footnote{We would like to thank S.~Katz for explaining this to us.}
+locally-free along the Schubert variety ${\mathbb P}^{n-1-\lambda_1}$.
+If one projects ${\mathbb P}^{n-1} \rightarrow {\mathbb P}^{\lambda_1-1}$,
+by mapping $x \mapsto (x_1, \cdots, x_{\lambda_1})$, the projection is not well-defined
+along ${\mathbb P}^{n-1-\lambda_1}$, but is well-defined on the complement,
+so we have a map
+\begin{equation}
+\pi: \: {\mathbb P}^{n-1} - {\mathbb P}^{n-1-\lambda_1} \: \longrightarrow
+\: {\mathbb P}^{\lambda_1-1}.
+\end{equation}
+On the complement, the cokernel is isomorphic to $\pi^* T {\mathbb P}^{\lambda_1-1}(1)$,
+locally-free of rank $\lambda_1-1$.  Along ${\mathbb P}^{n-1-\lambda_1}$, the
+map ${\cal O}(-1) \rightarrow {\cal O}^{\lambda_1}$ vanishes, so $C$ requires
+$k$ local generators at any point of ${\mathbb P}^{n-1-\lambda_1}$, and so is
+not locally-free of rank $\lambda_1-1$ there.
+
+To put this in context, the normal bundle to the Schubert variety
+${\mathbb P}^{n-1-\lambda_1}$ in ${\mathbb P}^{n-1}$ is
+${\cal O}(1)^{\lambda_1}$, since ${\mathbb P}^{n-1-\lambda_1}$ is a complete
+intersection of $\lambda_1$ sections of ${\cal O}(1)$.
+
+As a result, we cannot interpret this sheaf in terms of the normal bundle
+or tangent bundle or structure sheaf to the Schubert variety,
+except in the special case $\lambda_1 = 1$.
+
+We have not yet taken into account the gauge theory along the defect.
+
+**** From the defect $U(1)$ perspective, this defines something like
+\begin{equation}
+{\cal O}(1) \: \stackrel{\phi^{(1)}}{\longrightarrow} \:
+{\cal O}(1)^{\oplus \lambda_1}
+\end{equation}
+Helpful?
+
+
+**** Recall that for $S \subset X$,
+\begin{equation}
+0 \: \longrightarrow TS \: \hookrightarrow \: TX|_S \: \longrightarrow \:
+N_{S/X} \: \longrightarrow \: 0.
+\end{equation}
+
+*******************
+
+Next, consider $G(k,n)$, and the case that
+$\lambda = \tiny\yng(1)$.
+Here, $\ell = 1$, $M_0 = n-k$, $M_1 = k$.  The defect gauge group is $U(1)$,
+there is a bifundamental chiral $\varphi_1^2$ in $U(1) \times U(k)$
+(both gauged), and a bifundamental Fermi $\Lambda^{(1)}$ in
+$U(1) \times U(k)$ (the first factor gauged, the second factor global),
+with superpotential
+\begin{equation}
+\int d\theta \, \varphi_1^2 \phi^{(1)} \Lambda^{(1)}
+\end{equation}
+
+From the bulk, the complex complex for $\tiny\yng(1)$ above, on $G(k,n)$, is
+\begin{equation}
+S \: \stackrel{\phi^{(1)}}{\longrightarrow} \: {\cal O}^{k}
+\end{equation}
+(since here $M_1 = k$, $M_0 = n-k$).
+The cokernel of this complex is\footnote{
+We would like to thank S.~Katz for an explanation.
+}
+a sheaf supported on a Schubert cycle.
+On its support, it is generically a line bundle, but it degenerates in
+higher codimension.  He says its Chern character is computed as
+\begin{equation}
+{\rm ch} \: = \: k - {\rm ch}(S) \: = \: k - (k -  \sigma_1 + \cdots)
+\: = \: \sigma_1 + \cdots,
+\end{equation}
+consistent with being supported on a Schubert cycle.
+
+Now, in $G(k,n)$, the normal bundle to the Schubert variety corresponding to
+$\tiny\yng(1)$ is the determinant of the restriction of the universal
+subbundle $S$ **** OR ITS INVERSE *****.
+Clearly, $\Lambda^{(1)}$ does not itself couple to the normal bundle.
+
+Further, the cokernel of the sequence above also 
+can not be the normal
+bundle, as it has the wrong rank. 
+We can describe this more explicitly as follows.
+First, write the sequence as
+\begin{equation}
+S \: \longrightarrow \: {\cal O}^n \: \longrightarrow \: {\cal O}^{n}/{\cal O}^{n-k},
+\end{equation}
+where the first map is inclusion, and the second is a choice of projection
+of ${\mathbb C}^n$ onto ${\mathbb C}^k$.  The kernel of the projection
+${\mathbb C}^n \rightarrow {\mathbb C}^k$ is a $(n-k)$-dimensional subspace
+$V$.  The cokernel, call it $C$, is supported on the Schubert cycle of
+$k$-dimensional subspaces $W \subset {\mathbb C}^n$ such that
+$W \cap V \neq 0$.  If $W$ is such that 
+\begin{equation}
+\dim(W \cap V) \: = \: r,
+\end{equation}
+then the sheaf $C$ has $r$ generators locally at $W$ in $G(k,n)$,
+and $r \geq 1$ for $W$ in the Schubert cycle.  Generically, $r=1$ so that
+$C$ is a line bundle on a dense open subset of the Schubert cycle.
+However,
+the subset where $r \geq 2$ is nonempty (except for small values of $k$ or
+$n-k$), so that $C$ is not a line bundle, and so cannot be a normal
+bundle or dual of a normal bundle.
+
+**** Leonardo notes that this arises in degeneracy loci constructions.
+
+
+
+*** From the defect $U(1)$ perspective, this is something like
+\begin{equation}
+{\cal O}(1)^k \: \stackrel{\phi^{(1)}}{\longrightarrow} \:
+{\cal O}(1)^k
+\end{equation}
+Helpful?
+
+*** If we let ${\cal L}$ denote the defect $U(1)$ line, then altogether,
+combining bulk and defect,
+this is something like
+\begin{equation}
+S \otimes {\cal L} \: \stackrel{\phi^{(1)}}{\longrightarrow} \:
+{\cal L}^k
+\end{equation}
+Helpful?
+
+***** Here's what I'm taking from Sheldon's message:  these sheaves may have
+support on the Schubert cycle, but aren't otherwise obvious choices such as
+the tangent sheaf or normal sheaf or some such.  That's a pity.
+Can anything noteworthy be said about them?  Also, can we check in more
+general cases that they're still supported on Schubert cycles?
+
+***** In case it's helpful, the cotangent complex of the derived zero
+locus is described in
+\cite[section 4.1]{Sharpe:2019yag}.
+However, its cotangent complex is different from the sheaf
+we're seeing here.
+*****
+
+
+Another example.  Consider again $G(k,n)$, and the Schubert cycle corresponding
+to
+\begin{equation}
+\lambda \: = \: \tiny\yng(1,1).
+\end{equation}
+Here, $\ell=2$, the defect gauge group is $U(1) \times U(2)$,
+\begin{equation}
+M_1 \: = \: 1, \: \: \:
+M_2 \: = \: k-1, \: \: \:
+M_0 \: = \: n-k.
+\end{equation}
+Along the defect there are chirals $\varphi_1^2$ in the bifundamental
+of $U(1) \times U(2)$ (both gauged) and $\varphi_2^3$ in the
+bifundamental of $U(2) \times U(k)$ (both gauged, the first along the
+defect, the second in bulk), as well as Fermi fields
+$\Lambda^{(1)}$ in the bifundamental of $U(1) \times U(M_1)$
+(the first local on the defect, the second global in bulk)
+and $\Lambda^{(2)}$ in the bifundamental of $U(2) \times U(M_2)$
+(the first local on the defect, the second global in bulk),
+and a superpotential
+\begin{equation}
+\int d \theta \left( \varphi_1^2 \varphi_2^3 \phi^{(1)} \Lambda^{(2)} \: + \:
+\varphi_2^3 \phi^{(2)} \Lambda^{(2)} \right),
+\end{equation}
+which enforce (via $F$-terms) the constraints
+\begin{equation}
+\varphi_1^2 \varphi_2^3 \phi^{(1)} \: = \: 0, \: \: \:
+\varphi_2^3 \phi^{(2)} \: = \: 0.
+\end{equation}
+
+
+
+
+
+
+\section{Symplectic Grassmannians}
+
+According to Leonardo, there is *not* a simple relationship between
+Schubert cycles in ordinary Grassmannians
+and Schubert cycles in sympletic, orthogonal Grassmannians.
+Pity -- I was thinking one could repeat Cyril's construction in the
+symplectic and orthogonal cases, but it sounds like something more
+is required.
+
+
+****** \cite{bkt} has some basic info on Schubert cycles in symplectic
+Grassmannians.  Idea is that instead of looking at flags,
+look at isotropic flags, satisfying some rank conditions.
+*****
+
+**** In particular, for symplectic Grassmannians, from 
+\cite[section 1.1]{bkt}, the cohomology is generated over the
+integers by a subset of all Young diagrams, namely those for which
+$\lambda_1 > \lambda_2 > \cdots$.  So for example, for $LG(2,4)$,
+the allowed Young diagrams are
+\begin{equation}
+1, \: \: \:
+\yng(1), \: \: \:
+\yng(2), \: \: \:
+\yng(2,1),
+\end{equation}
+but not
+\begin{equation}
+\yng(1,1), \: \: \:
+\yng(2,2).
+\end{equation}
+Leonardo has confirmed this.
+
+**** Also, in case it's helpful, Lagrangian Grassmannians are zero sections
+of bundles over $G(n,2n)$. *****
+
+
+Recall from \cite{Gu:2020oeb} that the GLSM for the symplectic
+Grassmannian $SG(k,2n)$ is a $U(k)$ gauge theory with 
+$2n$ chirals $\Phi^a_{\pm i}$ in the fundamental representation $V$,
+and one chiral superfield $q_{ab}$ in the representation $\wedge^2 V^*$,
+with superpotential
+\begin{equation}
+W \: = \: \sum_{i=1}^n q_{ab} \Phi^a_{+i} \Phi^b_{-i}.
+\end{equation}
+The superpotential enforces the isotropy condition
+\begin{equation}
+\sum_{i=1}^n \phi^a_{+i} \phi^b_{-i} \: = \:
+\sum_{i=1}^n \phi^b_{+i} \phi^a_{-i}.
+\end{equation}
+
+Now, if we give a mass to a subset, we need to do so in such a way
+as to preserve the isotropy condition.
+
+Here's a guess for the first nontrivial Schubert cycle, corresponding
+to a single box:
+break $\phi_{\pm}$ (each a $k \times n$ matrix)
+into a $k \times k$ matrix $\phi_{\pm}^{(1)}$ and a 
+$k \times (n-k)$ matrix $\phi_{\pm}^{(0)}$.
+Let $\varphi_{1 \pm}^2$ be a pair of bifundamentals $U(1) \rightarrow U(k)$,
+and $\Lambda_{\pm}^{(1)}$ be two sets of Fermis in the fundamental,
+and define
+\begin{equation}
+W \: = \: \varphi_{1+}^2 \phi^{(1)}_+ \Lambda^{(1)}_+ \: + \:
+\varphi_{1-}^2 \phi^{(1)}_- \Lambda^{(1)}_-.
+\end{equation}
+That will give a mass to a $1\times k$ submatrix of both
+$\phi_{\pm}$, which at least potentially is consistent with the isotropy
+condition.
+
+**** What constraints exist on Young diagrams describing Schubert cells
+in symplectic Grassmannians?
+
+Let's rewrite to take into account the global $SU(2)$ symmetry, for
+which $\pm$ is a doublet.  Now, we have 3 factors, but, 
+\begin{equation}
+2 \otimes 2 \otimes 2 \: = \: 4 \oplus 2 \oplus 2
+\end{equation}
+contains no singlets, so to rewrite in a manifestly $SU(2)$-invariant
+form, we need to group the 3 factors into a product of two.  We can write
+either
+\begin{equation}
+\omega^{ab} \varphi_{1 a}^2 \phi_a^{(1)} \Lambda_b^{(1)}
+\end{equation}
+or
+\begin{equation}
+\omega^{ab} \varphi_{1 a}^2 \phi^{(1)}_b \Lambda_b^{(1)}
+\end{equation}
+or
+\begin{equation}
+\omega^{ab} \varphi_{1 b}^2 \phi^{(1)}_a \Lambda_b^{(1)}
+\end{equation}
+All three are consistent with $SU(2)$.  Let's work out more examples of
+Schubert cycles, that should make it clear which of these is correct.
+
+**** Alternate:
+
+Alternatively, maybe there's only one $\varphi_1^2$, not two.
+In that case, the defect superpotential is just
+\begin{equation}
+\omega^{ab} \varphi_1^2 \phi^{(1)}_a \Lambda^{(1)}_b
+\end{equation}
+
+Note that this expression immediately generalizes to other quivers of
+\cite{Closset:2023bdr}:  we use the same quiver and same $\varphi$,
+and just constract everything else along global $SU(2)$ indices.
+
+One consistency check:  are we giving a mass to all of the $\Lambda$'s?
+We need to lift the same number of bosonic modes.  That may help cut down
+on the possibilities.
+
+
+
+
+TO DO:
+\begin{itemize}
+\item Generalize to other Young diagrams.  For the last proposal above,
+that's easy.  If we need a different proposal, we'll have to figure out the
+generalization.
+%
+\item Compare to known Schubert cycles -- presumably results exist for
+$LG(2,4)$, for example.
+%
+\item Compute Grothendieck polynomials to check against known results.
+\end{itemize}
+
+
+\appendix
+
+
+\section{Comparison of Schubert cells in $G(3,6)$ and $LG(3,6)$}
+
+**** Briefly, the restriction of Schubert cells in $G(3,6)$ are *not*
+the Schubert cells in $LG(3,6)$.  Below is a message from Leonardo, Nov 16:
+
+As far as I can see, if one considers the inclusion 
+$LG(3,6) \rightarrow  G(3,6)$
+and pulls back cohomology classes of then
+\begin{eqnarray}
+i^*(1) & = & (1)
+\\
+i^*(2) & = & (2)
+\\
+i^*(2,1) & = & (2,1) + (3)
+\\
+i^*(3) & = & (3).
+\end{eqnarray}
+So one obtains more than 1 Schubert class, even if one pull back classes for strict partitions.
+
+This is consistent to the fact that
+\begin{equation}
+i^*((2,11) +(3)) = i^*((2) \cdot (1)) = i^*(2) \cdot i^*(1) = (2) * (1) 
+= 2 (3) + (2,1).
+\end{equation}
+
+\section{Example: Schubert cells in $LG(2,4)$}
+
+These are computed with respect to the symplectic form
+\begin{equation}
+\left[ \begin{array}{cc}
+0 & +I \\ -I & 0 \end{array} \right].
+\end{equation}
+where $I$ denotes the $2 \times 2$ identity matrix.
+
+We need to find a set of subspaces $F_i$ ($i \in \{1, \cdots, 2n\}$ for
+$SG(k,2n)$), where the dimension of $F_i$ is $i$,
+such that $F_{n+i} = F_{n-i}^{\perp}$.
+Here, we can take
+\begin{eqnarray}
+F_1 & = & \langle e_1 \rangle,
+\\
+F_2 & = & \langle e_1, e_2 \rangle \: = \: F_2^{\perp},
+\\
+F_3 & = & \langle e_1, e_2, e_4 \rangle \: = \: F_1^{\perp},
+\\
+F_4 & = & {\mathbb C}^4.
+\end{eqnarray}
+
+**** BELOW IS NONSENSE:
+
+Below are some examples of Schubert cells in $LG(2,4)$:
+\begin{eqnarray}
+\emptyset: & & \phi = \left[ \begin{array}{cccc}1 & 0 & a & b \\
+0 & 1 & c & d \end{array} \right], \: \: \: b=c, \\
+& & 
+\phi_+ = \left[ \begin{array}{cc} 1 & 0 \\ 0 & 1 \end{array} \right],
+\: \: \:
+\phi_- = \left[ \begin{array}{cc} a & b \\ b & d \end{array} \right];
+\\
+\tiny\yng(1): & & \phi = \left[ \begin{array}{cccc} 1 & c & 0 & b \\
+0 & 0 & 1 & a \end{array} \right], \: \: \: 1 + ac = 0;
+\\
+\tiny\yng(2): & & \phi = \left[ \begin{array}{cccc} 1 & 0 & b & 0 \\
+0 & 0 & 0 & 1 \end{array} \right];
+\\
+\tiny\yng(2,1): & & \phi = \left[ \begin{array}{cccc} 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \end{array} \right].
+\end{eqnarray}
+Briefly, these are obtained by starting with the Schubert cells used
+in \cite{Closset:2023bdr} for $G(2,4)$, and then imposing the isotropy
+condition, with the exception of the cell for $\tiny\yng(2,1)$.
+
+*** Should I be worried about the quadratic condition on the coefficients
+in $\tiny\yng(1)$ ???
+
+
+\begin{thebibliography}{199}
+
+\addcontentsline{toc}{section}{References}
+
+
+\bibitem{Closset:2023bdr}
+C.~Closset and O.~Khlaif,
+``Grothendieck lines in 3d $\mathcal{N}=2$ SQCD and the quantum K-theory of the Grassmannian,''
+{\tt arXiv:2309.06980 [hep-th]}.
+
+\bibitem{Gu:2020oeb}
+W.~Gu, E.~Sharpe and H.~Zou,
+``GLSMs for exotic Grassmannians,''
+JHEP \textbf{10} (2020) 200,
+{\tt arXiv:2008.02281 [hep-th]}.
+
+\bibitem{fp} W. Fulton, P. Pragacz, {\it Schubert varieties and degeneracy
+loci}, Lecture notes in math. 1689, Springer, Berlin, 1998.
+
+\bibitem{bkt} A. Buch, A. Kresch, H. Tamvakis, ``Quantum Pieri rules for
+isotropic Grassmannians,''
+available at
+{\tt https://sites.math.rutgers.edu/~asbuch/papers/qprig.pdf}
+
+
+\bibitem{gh} P. Griffiths, J. Harris, {\it Principles of algebraic
+geometry}, John Wiley \& Sons, New York, 1978.
+
+\bibitem{Sharpe:2019yag}
+E.~Sharpe,
+``Categorical equivalence and the renormalization group,''
+Fortsch. Phys. \textbf{67} (2019)  1910019,
+{\tt arXiv:1903.02880 [hep-th]}.
+
+\bibitem{Donagi:2007hi}
+R.~Donagi and E.~Sharpe,
+``GLSM's for partial flag manifolds,''
+J. Geom. Phys. \textbf{58} (2008) 1662-1692,
+{\tt arXiv:0704.1761 [hep-th]}.
+
+\bibitem{fulton} W. Fulton, {\it Intersection theory}, second edition,
+Springer-Verlag, Berlin, 1998.
+
+\bibitem{buch1} A. Buch, ``Grothendieck classes of quiver varieties,''
+Duke Math. J. {\bf 115} (2002) 75-103,
+{\tt arXiv:math/0104029 [math.AG]}.
+
+
+\end{thebibliography}
+
+\end{document}
+
