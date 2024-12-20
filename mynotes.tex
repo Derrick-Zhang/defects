@@ -1,0 +1,161 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{jheppub} % for details on the use of the package, please see the JINST-author-manual
+\usepackage{lineno}
+\linenumbers
+
+
+
+%\arxivnumber{1234.56789} % if you have one
+
+\title{\boldmath Schubert defects in LG}
+
+% Collaborations
+
+%% [A] If main author
+%% \collaboration{\includegraphics[height=17mm]{collabroation-logo}\\[6pt]
+%%  XXX collaboration}
+
+%% or
+%% [B] If "on behalf of"
+%% \collaboration[c]{on behalf of XXX collaboration}
+
+
+% Authors
+% The "\note" macro will give a warning: "Ignoring empty anchor...", you can safely ignore it.
+
+%% [A] simple case: 2 authors, same institution
+%% \author[1]{A. Uthor\note{Corresponding author.}}
+%% \author{and A. Nother Author}
+%% \affiliation{Institution,\\Address, Country}
+
+%% or, e.g.
+%% [B] more complex case: 4 authors, 3 institutions, 2 footnotes
+%% \author[a,b]{F. Irst,\note{Now at another university}}
+%% \author[c]{S. Econd,}
+%% \author[a,2]{T. Hird\note{Also at Some University.}}
+%% \author[c,2]{and Fourth}
+%% \affiliation[a]{Institution_1,\\Address, Country}
+%% \affiliation[b]{Institution_2,\\Address, Country}
+%% \affiliation[c]{Institution_3,\\Address, Country}
+
+\author{H. Zhang}
+\affiliation{Virginia Tech}
+%\affiliation{Another University,\\
+%different-address, Country}
+
+% E-mail addresses: only for the corresponding author
+\emailAdd{hzhang96@vt.edu}
+
+\abstract{Abstract...}
+
+
+
+\begin{document}
+\maketitle
+\flushbottom
+
+\section{General argument}
+Consider a map $F: X \to Y$ of algebraic varieties. There is a induced map $F_*$ mapping cycles in $X$ to cycles in $Y$. Alternatively, we denote $F_*$ by $\int_X^Y$.
+
+\section{Starting point: projective bundle}
+We consider the pushforward of powers of hyperplane class in a projective bundle. Let $E \to X$ be a vector bundle of rank $n$, let $\pi: \mathbf{P}(E) \to X$ be the projective bundle of lines in $E$ and let
+\begin{equation}
+    \xi = c_1 \left(\mathcal{O}_{\mathbf{P}(E)}(1)\right)
+\end{equation}
+be the hyperplane class. For any $i$, the Segre class of $E$ is
+\begin{equation}
+    s_i(E) :=\pi_*(\xi^{i+n-1}).
+\end{equation}
+Therefore, for a cycle in $\mathbf{P}(E)$, represented by
+\begin{equation}
+    f(\xi) = \sum_i \alpha_i \xi^i,
+\end{equation}
+its pushforward, which is a cycle in $X$, is given by
+\begin{equation}
+    \pi_*(f(\xi)) = \sum_i \alpha_i \pi_* (\xi^i) = \sum_i \alpha_i s_{i-n+1}(E).
+\end{equation}
+
+\bigskip
+\noindent\textbf{Notation.} Let $f$ be a Laurent polynomial, and $m$ be a monomial in $f$, we will denote by $[m](f)$ the coefficient of $m$ in $f$. For example, using this notation, we have
+\begin{equation}
+    [x^3](ax^3 + bx + cx^{-1}) = a
+\end{equation}
+For a shifting monomial $\tilde{m}$, we have
+\begin{equation}
+    [\tilde{m}m](\tilde{m}f) = [m](f).
+\end{equation}
+
+\bigskip
+\noindent\textbf{Generating series.} Let $\dim(X) = d$, we define
+\begin{equation}
+s_x (E) := 1 + x s_1(E) + x^2 s_2(E) + \cdots + x^d s_d (E).
+\end{equation}
+Then
+\begin{equation}
+    s_{i-n+1}(E) = [x^{i-n+1}](s_x(E)) = [x^{-n+1}](x^{-i}s_x(E)).
+\end{equation}
+We want to work with non negative powers, and we set $t = 1/x$, then
+\begin{equation}
+    s_{i-n+1}(E) = [t^{n-1}](t^i s_{1/t}(E)).
+\end{equation}
+Now plug this back into the pushforward formula, we have
+\begin{equation}
+    \pi_*(f(\xi)) = \sum_i \alpha_i [t^{n-1}](t^i s_{1/t}(E)) = [t^{n-1}] (f(t) s_{1/t}(E)).
+\end{equation}
+
+\bigskip
+\noindent\textbf{Physics point of view.} 
+Consider the tautological bundle $S \to Gr(k,n)$ of rank $k$ over a Grassmannian. Consider $f(\xi)$ a cocycle in $\mathbf{P}(S)$, then
+\begin{equation}
+    \pi_*(f(\xi)) = [t^{k-1}](f(t) s_{1/t}(E)) = \oint_{}
+\end{equation}
+
+
+\section{Generalization to flag bundles}
+Now, given a vector bundle $E \to X$, we want to consider the flag bundle
+\begin{equation}
+    \pi: \mathbf{Fl}(q_1, q_2, \cdots, q_m)(E) \to X
+\end{equation}
+Since $E$ is a vector bundle over $X$, we can pull back this bundle, and obtain $\pi^* E$. There is a universal flag $U_{q_1} \subsetneq U(q_2) \subsetneq \cdots \subsetneq U(q_m)$ of subbundles of $\pi^* E$, where $\mathrm{rank}(U_{q_k}) = q_k$. The fiber of the bundle $U_{q_k}$ at a point $(V_{q_1} \subsetneq V_{q_2} \subsetneq \cdots \subsetneq V_{q_m} \subset E_x)$ is given by $V_{q_k}$.
+
+\subsection{Full flag bundles.} The basic idea is to construct the flag bundle as the chains of projective bundles
+
+
+
+
+
+
+% Bibliography
+
+%% [A] Recommended: using JHEP.bst file
+%% \bibliographystyle{JHEP}
+%% \bibliography{biblio.bib}
+
+%% or
+%% [B] Manual formatting (see below)
+%% (i) We suggest to always provide author, title and journal data or doi:
+%% in short all the informations that clearly identify a document.
+%% (ii) please avoid comments such as "For a review'', "For some examples",
+%% "and references therein" or move them in the text. In general, please leave only references in the bibliography and move all
+%% accessory text in footnotes.
+%% (iii) Also, please have only one work for each \bibitem.
+
+\begin{thebibliography}{99}
+
+\bibitem{a}
+Author,
+\emph{Title},
+\emph{J. Abbrev.} {\bf vol} (year) pg.
+
+\bibitem{b}
+Author,
+\emph{Title},
+arxiv:1234.5678.
+
+\bibitem{c}
+Author,
+\emph{Title},
+Publisher (year).
+
+\end{thebibliography}
+\end{document}
